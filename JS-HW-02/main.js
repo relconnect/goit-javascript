@@ -1,24 +1,22 @@
 let arr = [];
-let num;
-let summ = 0;
-do{
-  num = prompt("Enter a number");  
-  isNumber = Number(num);
-  if( !Number.isNaN(isNumber) && num != null){
-    arr.push(num);
+let number;
+let summ = null;
+do {
+  number = prompt("Enter a number");
+  if (number === null) break;
+  isNumber = Number(number);
+  if (!Number.isNaN(isNumber)) {
+    arr.push(isNumber);
   } else {
     break;
   }
+} while (number != "");
 
-} while(true);
-
-for(let val of arr){
-  summ += +val;
- }
- alert(`Общая сумма чисел равна: ${summ}`);
-
-
-
-
-
-
+if (arr.length) {
+  for (let val of arr) {
+    summ += val;
+  }
+  alert(`Общая сумма чисел равна: ${summ}`);
+} else {
+  alert("Массив пустой!");
+}
