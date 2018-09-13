@@ -1,3 +1,69 @@
+const logins = ["Mango", "robotGoogles", "Poly", "Aj4x1sBozz", "qwerty123"];
+
+const userLogin = prompt('Введите Login').toLowerCase();
+
+const min  = 4;
+const max = 16;
+
+const isLoginValid = login => {
+    if(login === null)
+        return;
+    let loginLength = login.length;
+    if(loginLength > min && loginLength < max){
+        return true;
+    }
+    return false;
+}
+
+const isLoginUnique = (allLogins, login) => {
+    const arrToLower = [];
+    allLogins.forEach(function(element) {
+        let elem = element.toLowerCase();
+        arrToLower.push(elem);
+      });
+
+    if(arrToLower.includes(login)){
+        return true;
+    }
+    return false;
+}
+
+const addLogin = function(login) {
+    
+    if(!isLoginValid(login)){
+        alert(`Ошибка! Логин должен быть от ${min} до ${max} символов`)
+    }else {
+       if(isLoginUnique(logins, userLogin )) {
+        alert(`Логин ${userLogin} уже используется!`)
+       } else{
+        logins.push(userLogin);
+        alert('Логин успешно добавлен!');
+       }
+    }    
+  };
+
+  addLogin(userLogin);
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ================2=====================
 // const formatString = str => {
 //     console.log(str.length);
@@ -99,20 +165,20 @@
 */
 
 // Вызовы функции для проверки
-const removeFromArray = function(arr) {    
-    let otherArguments = Array.from(arguments);
-    otherArguments.splice(0,1);
-    for(element of otherArguments){
-        if (arr.includes(element)){
-            let idx = arr.indexOf(element);
-            while (idx != -1) {
-                arr.splice(idx, 1);;
-                idx = arr.indexOf(element);
-              }
-        }
-    }
-    return arr;
-}
+// const removeFromArray = function(arr) {    
+//     let otherArguments = Array.from(arguments);
+//     otherArguments.splice(0,1);
+//     for(element of otherArguments){
+//         if (arr.includes(element)){
+//             let idx = arr.indexOf(element);
+//             while (idx != -1) {
+//                 arr.splice(idx, 1);;
+//                 idx = arr.indexOf(element);
+//               }
+//         }
+//     }
+//     return arr;
+// }
 
 // const removeFromArray = function() {    
 //     let [arr, ...otherArguments] = arguments;
@@ -128,10 +194,10 @@ const removeFromArray = function(arr) {
 //     return arr;
 // }
 
-console.log(
-    removeFromArray([1, 2, 3, 4, 5,4,5,4,5,4,4,4,4,4,4,4], 2, 4)
-  ); // [1, 3, 5]
+// console.log(
+//     removeFromArray([1, 2, 3, 4, 5,4,5,4,5,4,4,4,4,4,4,4], 2, 4)
+//   ); // [1, 3, 5]
   
-  console.log(
-    removeFromArray([12, 4, 3, 8, 17], 3, 29, 18, 4)
-  ); // [12, 8, 17]
+//   console.log(
+//     removeFromArray([12, 4, 3, 8, 17], 3, 29, 18, 4)
+//   ); // [12, 8, 17]
