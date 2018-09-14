@@ -43,15 +43,6 @@ const addLogin = function(logins, login) {
   addLogin(logins, userLogin);
 
 
- 
-
-
-
-
-
-
-
-
 
 
 
