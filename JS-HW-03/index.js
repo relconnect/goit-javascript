@@ -9,10 +9,9 @@ const isLoginValid = login => {
     if(login === null)
         return;
     let loginLength = login.length;
-    if(loginLength > min && loginLength < max){
-        return true;
-    }
-    return false;
+   loginLength > min && loginLength < max;
+        return loginLength ;
+   
 }
 
 const isLoginUnique = (allLogins, login) => {
@@ -22,27 +21,26 @@ const isLoginUnique = (allLogins, login) => {
         arrToLower.push(elem);
       });
 
-    if(arrToLower.includes(login)){
-        return true;
-    }
-    return false;
+        return arrToLower.includes(login);
+   
 }
 
-const addLogin = function(login) {
+const addLogin = function(logins, login) {
     
     if(!isLoginValid(login)){
-        alert(`Ошибка! Логин должен быть от ${min} до ${max} символов`)
+        alert(`Ошибка! Логин должен быть от ${min} до ${max} символов`);
+        return;
     }else {
-       if(isLoginUnique(logins, userLogin )) {
-        alert(`Логин ${userLogin} уже используется!`)
+       if(isLoginUnique(logins, login )) {
+        alert(`Логин ${login} уже используется!`)
        } else{
-        logins.push(userLogin);
+        logins.push(login);
         alert('Логин успешно добавлен!');
        }
     }    
   };
 
-  addLogin(userLogin);
+  addLogin(logins, userLogin);
 
 
  
