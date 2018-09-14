@@ -1,43 +1,33 @@
 const logins = ["Mango", "robotGoogles", "Poly", "Aj4x1sBozz", "qwerty123"];
 
-const userLogin = prompt('Введите Login').toLowerCase();
+const userLogin = prompt('Введите Login');
 
-const min  = 4;
-const max = 16;
+
 
 const isLoginValid = login => {
-    if(login === null)
-        return;
-    let loginLength = login.length;
-   loginLength > min && loginLength < max;
-        return loginLength ;
    
-}
+        return login === null ? 0 : login.length > 4 && login.length < 16;   
+   }
 
-const isLoginUnique = (allLogins, login) => {
-    const arrToLower = [];
-    allLogins.forEach(function(element) {
-        let elem = element.toLowerCase();
-        arrToLower.push(elem);
-      });
-
-        return arrToLower.includes(login);
-   
-}
+const isLoginUnique = (allLogins, login) => {  
+    
+        return allLogins.includes(login);
+    }
 
 const addLogin = function(logins, login) {
     
     if(!isLoginValid(login)){
-        alert(`Ошибка! Логин должен быть от ${min} до ${max} символов`);
+        alert(`Ошибка! Логин должен быть от 4 до 16 символов`);
         return;
     }else {
-       if(isLoginUnique(logins, login )) {
-        alert(`Логин ${login} уже используется!`)
-       } else{
+       if(!isLoginUnique(logins, login )) {
         logins.push(login);
         alert('Логин успешно добавлен!');
+        
+       } else{
+        alert(`Логин ${login} уже используется!`);
        }
-    }    
+    }      
   };
 
   addLogin(logins, userLogin);
