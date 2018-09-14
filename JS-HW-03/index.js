@@ -23,7 +23,6 @@ const addLogin = function(logins, login) {
        if(!isLoginUnique(logins, login )) {
         logins.push(login);
         alert('Логин успешно добавлен!');
-        
        } else{
         alert(`Логин ${login} уже используется!`);
        }
