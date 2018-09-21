@@ -19,38 +19,33 @@ const products = {
     this.name = name;
     this.productDatabase = productDatabase;
     this.customerMoney = 0;
-    this.totalPrice = 0;
-    this.change = 0;
-    let dolar = 1000000;
-    this.getCustomerMoney = function(value = 0){
+    this.totalPrice = 0  ; 
+    this.getCustomerMoney = function(value){
         this.customerMoney = value;
     };
 
-    this.countTotalPrice = function(order){
-        this.order = order;
+    this.countTotalPrice = function(order){          
         
-        let totalOrder = 0;
-        let price = 0;
-        for(const key in this.order){
+        let totalPrice = 0;
+        for(const key in order){
             if(this.productDatabase.hasOwnProperty(key)){
-                 totalOrder = this.order[key];
-                 price = this.productDatabase[key];
-                this.totalPrice +=  price * totalOrder;
+                 
+                totalPrice +=  this.productDatabase[key] * order[key];;
             }
         }
-        return this.totalPrice;
+        return totalPrice;
 
     };
         this.countChange = function (){
-           this.change =  this.customerMoney > this.totalPrice ? this.customerMoney - this.totalPrice : null;
-            return this.change;
+            return this.customerMoney > this.countTotalPrice(order) ? this.customerMoney - this.countTotalPrice(order) : null;
+             
         };
 
         this.onSuccess = function(change) {
-            alert(`Спасибо за покупку! Ваша сдача ${this.change}`);
+            alert(`Спасибо за покупку! Ваша сдача ${change}`);
         }
 
-        this.onError = function(change) {
+        this.onError = function() {
             alert(`Очень жаль, вам не хватает денег на покупки!`);
         }
 
@@ -100,5 +95,3 @@ const products = {
   
   // Проверяем значения после reset
   console.log(mango.customerMoney); // 0
-  
-  
