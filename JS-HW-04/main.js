@@ -19,7 +19,7 @@ const products = {
     this.name = name;
     this.productDatabase = productDatabase;
     this.customerMoney = 0;
-    this.totalPrice = 0  ; 
+   
     this.getCustomerMoney = function(value){
         this.customerMoney = value;
     };
