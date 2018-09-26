@@ -107,15 +107,14 @@ console.log(getAllNames(users));
 /**
  * Получить массив объектов пользователей по цвету глаз (поле eyeColor)
  */
-const getUsersByEyeColor = (arr, color) => {...};
+const getUsersByEyeColor = (arr, color) => arr.filter( user => user.eyeColor === color);
 
 console.log(getUsersByEyeColor(users, 'blue')); // [объект Moore Hensley, объект Sharlene Bush, объект Carey Barr]
 
-                                            
 /**
  * Получить массив имен пользователей по полу (поле gender)
  */
-const getUsersByGender = (arr, gender) => {...};
+const getUsersByGender = (arr, gender) => arr.filter( user => user.gender === gender);
 
 console.log(getUsersByGender(users, 'male')); // [ 'Moore Hensley', 'Ross Vazquez', 'Carey Barr', 'Blackburn Dotson' ]
 
@@ -123,7 +122,7 @@ console.log(getUsersByGender(users, 'male')); // [ 'Moore Hensley', 'Ross Vazque
 /**
  * Получить массив только неактивных пользователей (поле isActive)
  */
-const getInactiveUsers = arr => {...};
+const getInactiveUsers = arr => arr.filter( user => !user.isActive);
 
 console.log(getInactiveUsers(users)); // [объект Moore Hensley, объект Ross Vazquez, объект Blackburn Dotson]
                       
@@ -131,16 +130,15 @@ console.log(getInactiveUsers(users)); // [объект Moore Hensley, объек
 /**
  * Получить пользоваля (не массив) по email (поле email, он уникальный)
  */
-const getUserByEmail = (arr, email) => {...};
+const getUserByEmail = (arr, email) => arr.find( user => user.email === email).name;
 
 console.log(getUserByEmail(users, 'shereeanthony@kog.com')); // {объект пользователя Sheree Anthony}
 console.log(getUserByEmail(users, 'elmahead@omatom.com')); // {объект пользователя Elma Head}
 
-
 /**
  * Получить массив пользователей попадающих в возрастную категорию от min до max лет (поле age)
  */
-const getUsersWithAge = (arr, min, max) => {...};
+const getUsersWithAge = (arr, min, max) => arr.filter( user => user.age > min && user.age < max);
 
 console.log(getUsersWithAge(users, 20, 30)); // [объект Ross Vazquez, объект Elma Head, объект Carey Barr]
                                             
@@ -151,7 +149,7 @@ console.log(getUsersWithAge(users, 30, 40));
 /**
  * Получить общую сумму баланса (поле balance) всех пользователей
  */
-const getTotalBalance = arr => {...};
+const getTotalBalance = arr => arr.reduce(((accum, user) =>accum + user.balance),0);
 
 console.log(getTotalBalance(users)); // 20916
                                 
@@ -159,8 +157,27 @@ console.log(getTotalBalance(users)); // 20916
 /**
  * Массив имен всех пользователей у которых есть друг с указанным именем
  */
-const getUsersByFriend = (arr, name) => {...};
+//            Способ 1
+// const getUsersByFriend = (arr, name) => {
+//   const arrayNames =[];
+//   arr.forEach(user => {
+//     if(user.friends.includes(name)){
+//       arrayNames.push(user.name);
+//     }
+//   })
+// return arrayNames;
+// };
+
+//            Способ 2
+
+const getUsersByFriend = (arr, name) => arr
+  .filter(user =>user.friends.includes(name))
+  .map(user => user.name);
+
 
 console.log(getUsersByFriend(users, 'Briana Decker')); // [ 'Sharlene Bush', 'Sheree Anthony' ]
 console.log(getUsersByFriend(users, 'Goldie Gentry')); // [ 'Elma Head', 'Sheree Anthony' ]
                                             
+                                       
+
+
