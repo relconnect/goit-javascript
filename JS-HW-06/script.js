@@ -25,11 +25,14 @@ class Hamburger {
    * @param {String} topping - Тип добавки
    */
   removeTopping(topping) {
+      // if(this._toppings.includes(topping)){
+      //   let index = this._toppings.indexOf(topping);
+      //   this._toppings.splice(index,1);
+      // }
       if(this._toppings.includes(topping)){
-        let index = this._toppings.indexOf(topping);
-        this._toppings.splice(index,1);
+        this._toppings = this._toppings.filter(item => item !== topping );
       }
-      
+
   }
 
   /**
