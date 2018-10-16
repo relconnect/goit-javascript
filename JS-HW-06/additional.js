@@ -219,14 +219,5 @@
 // // Вызовы функции для проверки
 // console.log(getTotalPrice(products, orderA)); // 140
 // console.log(getTotalPrice(products, orderB)); // 130
-let User = function(name){
-  this.name = name;
 
-}
-
-User.age = 20;
-
-let a = new User('Polu');
-
-console.log(a);
 

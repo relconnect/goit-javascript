@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Запустить программу",
-            "program": "${workspaceFolder}/JS-HW-01\\main.js"
+            "program": "${workspaceFolder}/JS-HW-07\\main.js"
         }
     ]
 }
