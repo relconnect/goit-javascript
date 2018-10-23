@@ -191,3 +191,15 @@ const createBoxes = num => {
 
 createBoxes(8);
 
+let adr = function (str){
+  let index = 0;
+  let counter = 0;
+  let sttr = '';
+while(a[i] == a[i+1]){
+  couner++;
+  index++
+}
+sttr = sttr +counter;
+conter = 0
+
+}

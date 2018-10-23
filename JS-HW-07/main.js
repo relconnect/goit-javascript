@@ -123,6 +123,11 @@ const posts = [
     title: "Post title 3",
     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, nemo dignissimos ea temporibus voluptatem maiores maxime consequatur impedit nobis sunt similique voluptas accusamus consequuntur, qui modi nesciunt veritatis distinctio rem!",
     link: 'link-3.com'
+  },{
+    img: "https://placeimg.com/400/150/arch",
+    title: "Post title 3",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, nemo dignissimos ea temporibus voluptatem maiores maxime consequatur impedit nobis sunt similique voluptas accusamus consequuntur, qui modi nesciunt veritatis distinctio rem!",
+    link: 'link-3.com'
   }
 ];
 
@@ -149,15 +154,16 @@ const createPostCard = (elem) => {
       link.classList.add('button');
       link.setAttribute("href", elem.link);
       link.textContent = 'Read more';
-      node.append(img,heading,text,link);
-
-      document.querySelector('#root').append(node);
+      node.append(img,heading,text,link);    
       
-        
+      return node; 
 };
 
 const createCards = (posts) => {
-  posts.forEach(createPostCard);
+  let arrPosts = posts.map(el => createPostCard(el));
+  return arrPosts;  
 }
 
-createCards(posts);
+createCards(posts).forEach( el => document.querySelector('#root').append(el));
+
+
