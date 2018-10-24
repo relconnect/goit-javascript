@@ -164,6 +164,9 @@ const createCards = (posts) => {
   return arrPosts;  
 }
 
-createCards(posts).forEach( el => document.querySelector('#root').append(el));
+// createCards(posts).forEach( el => document.querySelector('#root').append(el));
 
 
+let node = document.querySelector('#root');
+let nodes = createCards(posts);
+node.append(...nodes);
