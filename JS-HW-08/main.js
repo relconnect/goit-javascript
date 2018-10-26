@@ -42,6 +42,8 @@ const prevImgages = document.querySelector(".preview");
 
 prevImgages.addEventListener('click', show);
 
+// функция для создания списка картинок
+
 function createPrevImg(elem) {
   let liNode = document.createElement("li");
   let imgNode = document.createElement("img");
@@ -52,6 +54,14 @@ function createPrevImg(elem) {
   return liNode;
 }
 
+
+/**
+ *
+ *
+ * @param {*} obj - массив с информацией для создания картинок
+ * @param {number} [number=1] - картинка для отображения по умолчанию
+ * @returns массив preview картинок 
+ */
 function createPrevImgGallary (obj, number = 1){
   let imgArray = obj.map(el => createPrevImg(el));
 
@@ -60,6 +70,12 @@ function createPrevImgGallary (obj, number = 1){
   return imgArray;  
 }
 
+/**
+ *
+ *
+ * @param {string} [src='img/fullview-1.jpg'] - атрибут src для fullview картинки
+ * @param {string} [alt='alt text 1'] - атрибут alt для fullview картинки
+ */
 function createfullviewImg(src = 'img/fullview-1.jpg', alt = 'alt text 1') {
   let fullImgNode = document.createElement('img'); 
   fullImgNode.setAttribute("src", src);
@@ -71,13 +87,23 @@ PrevImagesArray = createPrevImgGallary(galleryItems,1);
 
 prevImgages.append(...PrevImagesArray);
 
+/**
+ *
+ *
+ * @param {*} {target} - элемент на котором
+ */
 function show({target}){ 
+  if (target.nodeName !== "IMG") 
+     return;
+
   let uri = target.dataset.fullview;
   let altText = target.alt;
   fullImg.firstElementChild.src = uri;
-  fullImg.firstElementChild.alt = altText;   
-
+  fullImg.firstElementChild.alt = altText; 
+ 
+  
   PrevImagesArray.forEach(link => {
+    
     if (link.firstElementChild !== target) {
       link.classList.remove("active");
     } else {
