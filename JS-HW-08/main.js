@@ -1,104 +1,88 @@
-/*
-  Ознакомьтесь с HTML и CSS.
-  
-  Есть меню навигации, необходимо написать скрипт, который
-  при клике на пункт меню добавит ему класс menu-link-active,
-  таким образом выделив текущую (активную) ссылку,
-  при этом убрав его у всех остальных элементов меню.
-  
-  Пункотв меню может быть произвольное количество, используйте
-  прием "Делегирование событий". Учтите клик по самому ul, его
-  необходимо игнорировать.
-  
-  При клике по ссылкам не должна перезагружаться страница!
-*/
-
-
-// let str = "aaabbcccc";
-// const sum = function(str) {
-//   let arr = str.split("");
-//   let arr2 = [];
-//   let counter = 0;
-//   let str2 = "";
-  
-//   for (elem of arr) {
-//     if (arr2.includes(elem)) {
-//       continue;
-//     } else {
-//       arr2.push(elem);
-//     }
-//   }
-//   for (x of arr2) {
-//     let num = arr.filter(item => item === x);
-//     str2 += x +num.length;
-//   }
-//  console.log(str2);
-// };
-// sum(str);
-
-
-// let str = "aaabbcccc";
-// let str2='';
-// let count = 1;
-// for (i=0; i< str.length; i++){
-  
-//   if(str[i] == str[i+1]){
-//     count += 1;
-//   } else {
-//     str2 += str[i] + count;
-//     count = 1;
-//     continue;
-//   }
-// }
-// console.log(str2);
-
-
-const throttleHandleMouseMove = throttle(HandleMouseMove, 100);
-
-
-let counter = 0; 
-  
-function HandleMouseMove(event){
-  counter +=1;
-  document.querySelector('.root').textContent = counter;
-}
-
-function throttle(fn,delay){
-  
-  let lastCall = 0;
-  return function(...args) {
-    const now = new Date().getTime();
-    if(now - lastCall < delay) {
-     
-    return;
-    }
-    lastCall = now;
-    
-    return fn(...args);
+const galleryItems = [
+  {
+    preview: "img/preview-1.jpg",
+    fullview: "img/fullview-1.jpg",
+    alt: "alt text 1"
+  },
+  {
+    preview: "img/preview-2.jpg",
+    fullview: "img/fullview-2.jpg",
+    alt: "alt text 2"
+  },
+  {
+    preview: "img/preview-3.jpg",
+    fullview: "img/fullview-3.jpg",
+    alt: "alt text 3"
+  },
+  {
+    preview: "img/preview-4.jpg",
+    fullview: "img/fullview-4.jpg",
+    alt: "alt text 4"
+  },
+  {
+    preview: "img/preview-5.jpg",
+    fullview: "img/fullview-5.jpg",
+    alt: "alt text 5"
+  },
+  {
+    preview: "img/preview-6.jpg",
+    fullview: "img/fullview-6.jpg",
+    alt: "alt text 6"
   }
+];
+
+// document.addEventListener('DOMContentLoaded',createGalary);
+
+// function createGalary(){
+
+// }
+
+const fullImg = document.querySelector(".fullview");
+const prevImgages = document.querySelector(".preview");
+
+prevImgages.addEventListener('click', show);
+
+function createPrevImg(elem) {
+  let liNode = document.createElement("li");
+  let imgNode = document.createElement("img");
+  imgNode.setAttribute("src", elem.preview);
+  imgNode.setAttribute("alt", elem.alt);
+  imgNode.dataset.fullview = elem.fullview;
+  liNode.append(imgNode);
+  return liNode;
 }
 
-// window.addEventListener('mousemove', throttleHandleMouseMove);
-let root = document.querySelector('.root');
+function createPrevImgGallary (obj, number = 1){
+  let imgArray = obj.map(el => createPrevImg(el));
 
-window.addEventListener('scroll', (event) => console.log(root.getBoundingClientRect()));
-
-window.addEventListener(
-  'scroll',
-  () => console.log('pageYOffset: ', pageYOffset)
-);
-
-var i = 0, j = 0;
-// Желаемое количество строк
-var max = 15;
-var space = "",
-    star = "";
-
-while (i < max) {
-    space = "";
-    star = "";
-    for (j = 0; j < max - i; j++) space += " ";
-    for (j = 0; j < 2 * i + 1; j++) star += "*";
-    console.log(space + star);
-    i++;
+  createfullviewImg(imgArray[number-1].firstElementChild.dataset.fullview, imgArray[number].firstElementChild.alt);
+  imgArray[number-1].classList.add("active");
+  return imgArray;  
 }
+
+function createfullviewImg(src = 'img/fullview-1.jpg', alt = 'alt text 1') {
+  let fullImgNode = document.createElement('img'); 
+  fullImgNode.setAttribute("src", src);
+  fullImgNode.setAttribute("alt", alt);
+  fullImg.append(fullImgNode);
+}
+
+PrevImagesArray = createPrevImgGallary(galleryItems,1);
+
+prevImgages.append(...PrevImagesArray);
+
+function show({target}){ 
+  let uri = target.dataset.fullview;
+  let altText = target.alt;
+  fullImg.firstElementChild.src = uri;
+  fullImg.firstElementChild.alt = altText;   
+
+  PrevImagesArray.forEach(link => {
+    if (link.firstElementChild !== target) {
+      link.classList.remove("active");
+    } else {
+      link.classList.add("active");
+    }
+  });
+}
+
