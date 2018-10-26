@@ -31,11 +31,9 @@ const galleryItems = [
   }
 ];
 
-// document.addEventListener('DOMContentLoaded',createGalary);
+document.addEventListener('DOMContentLoaded',createGalary);
 
-// function createGalary(){
-
-// }
+function createGalary(){ 
 
 const fullImg = document.querySelector(".fullview");
 const prevImgages = document.querySelector(".preview");
@@ -112,3 +110,4 @@ function show({target}){
   });
 }
 
+}
