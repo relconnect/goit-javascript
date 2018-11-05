@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>10</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54="
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2">
+                <button type="button" class="btn btn-primary btn-lg js-getusers">Get all users</button>
+                <ul class="list-group js-list">
+                    
+                </ul>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-info btn-lg js-getuser">Get user</button>
+                <div class="input-group input-group-sm mb-3">
+
+                    <input type="text" class="form-control js-getid" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                        placeholder="Enter user's id">
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item js-user"></li>
+
+                </ul>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-success btn-lg js-add-user">Put user</button>
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">name</span>
+                    </div>
+                    <input type="text" class="form-control js-name-value" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">age</span>
+                    </div>
+                    <input type="text" class="form-control js-age-value" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-danger btn-lg js-remove-user">Delete user</button>
+                <div class="input-group input-group-sm mb-3">
+
+                    <input type="text" class="form-control js-remove-value" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                        placeholder="Enter user's id">
+                </div>
+                
+            </div>
+            <div class="col-2">
+                    <button type="button" class="btn btn-warning btn-lg js-update">Update user</button>
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">id</span>
+                        </div>
+                        <input type="text" class="form-control js-update-id" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">name</span>
+                        </div>
+                        <input type="text" class="form-control js-update-name" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">age</span>
+                            </div>
+                            <input type="text" class="form-control js-update-age" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
