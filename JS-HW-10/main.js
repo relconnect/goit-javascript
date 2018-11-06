@@ -116,11 +116,29 @@ class UserApi {
           throw new Error(`ERROR: ${response.statusText}`);
         }
       })
-      .then(data => {
-        console.log(data);
-        if (data.status == 201) {
-          alert("User added");
-        } else alert("Try again!");
+      .then(obj => {
+        name.value = '';
+        age.value = '';
+        this.list.textContent = "";
+        if (obj.status != 500) {
+          let user = obj.data;
+          if (obj.status == 201) {
+            let li = document.querySelector(".js-new-user");
+            li.textContent = "";
+            let pID = document.createElement("p");
+            let pName = document.createElement("p");
+            let pAge = document.createElement("p");
+            pID.textContent = `User ID: ${user._id}`;
+            pName.textContent = `User name: ${user.name}`;
+            pAge.textContent = `User age: ${user.age}`;
+            li.append(pID, pName, pAge);
+            swal("User added", `User ID: ${user._id}`, "success");
+          } else {
+            swal("Try again", "Something gonna wrong", "error");
+          }
+        } else {
+          swal(`Server error: ${obj.status}`, `${obj.errors[0]}`, "error");
+        }
       })
       .catch(err => console.log(err));
   }
@@ -142,16 +160,22 @@ class UserApi {
           throw new Error(`ERROR: ${response.statusText}`);
         }
       })
-      .then(data => {
-        if (data.status == 200) {
-          alert("User removed");
+      .then(obj => {
+        this.list.textContent = "";
+        if (obj.status == 200) {
+          swal(
+            "User removed",
+            `User ID: ${userId} has been removed`,
+            "success"
+          );
         } else {
-          alert(data.status + " " + data.errors[0]);
+          swal(`Server error: ${obj.status}`, `${obj.errors[0]}`, "error");
         }
       })
       .catch(err => console.log(err));
   }
   updateUser() {
+    this.list.textContent = "";
     let userId = document.querySelector(".js-update-id").value;
     let userName = document.querySelector(".js-update-name").value;
     let userAge = document.querySelector(".js-update-age").value;
@@ -167,7 +191,6 @@ class UserApi {
       }
     })
       .then(response => {
-        console.log(response);
         if (response.ok) {
           return response.json();
         } else {
@@ -175,11 +198,15 @@ class UserApi {
         }
       })
       .then(data => {
-          console.log(data)
+        console.log(data);
         if (data.status == 200) {
-          alert("User update");
+          swal(
+            "User updated",
+            `User with ID: ${data.data.id} has been updated`,
+            "success"
+          );
         } else {
-          alert(data.status + " " + data.errors[0]);
+          swal(`Server error: ${data.status}`, `${data.errors[0]}`, "error");
         }
       })
       .catch(err => console.log(err));
