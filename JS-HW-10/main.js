@@ -162,6 +162,7 @@ class UserApi {
       })
       .then(obj => {
         this.list.textContent = "";
+        document.querySelector('.js-user').textContent = '';
         if (obj.status == 200) {
           swal(
             "User removed",
