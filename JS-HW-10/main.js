@@ -78,22 +78,25 @@ class UserApi {
         } else {
           throw new Error(`ERROR: ${response.statusText}`);
         }
-      })
-      .then(data => {
-        let user = data.data;
-        return user;
-      })
-      .then(elem => {
-        let li = document.querySelector(".js-user");
-        li.textContent = "";
-        let pID = document.createElement("p");
-        let pName = document.createElement("p");
-        let pAge = document.createElement("p");
-        pID.textContent = `User ID: ${elem.id}`;
-        pName.textContent = `User name: ${elem.name}`;
-        pAge.textContent = `User age: ${elem.age}`;
-        li.append(pID, pName, pAge);
-      });
+      }).then(elem => {
+        console.log(elem);
+        if(elem.status == 200){
+          let li = document.querySelector(".js-user");
+          li.textContent = "";
+          let pID = document.createElement("p");
+          let pName = document.createElement("p");
+          let pAge = document.createElement("p");
+          pID.textContent = `User ID: ${elem.data.id}`;
+          pName.textContent = `User name: ${elem.data.name}`;
+          pAge.textContent = `User age: ${elem.data.age}`;
+          li.append(pID, pName, pAge);
+          document.querySelector(".js-getid").value = '';
+        }else {
+          document.querySelector(".js-getid").value = ''; 
+          swal(`Server error: ${elem.status}`, `${elem.errors[0]}`, "error");
+        }
+        
+      }).catch(err => console.log(err));
   }
   addUser() {
     let name = document.querySelector(".js-name-value");
