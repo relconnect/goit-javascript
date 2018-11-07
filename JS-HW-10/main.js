@@ -164,16 +164,17 @@ class UserApi {
         }
       })
       .then(obj => {
+        document.querySelector(".js-remove-value").value ='';
         this.list.textContent = "";
         document.querySelector('.js-user').textContent = '';
-        if (obj.status == 200) {
+        if (obj.status == 200 && obj.data != null) {
           swal(
             "User removed",
             `User ID: ${userId} has been removed`,
             "success"
           );
         } else {
-          swal(`Server error: ${obj.status}`, `${obj.errors[0]}`, "error");
+          swal(`Error`, `There is no user with this ID`, "error");
         }
       })
       .catch(err => console.log(err));
