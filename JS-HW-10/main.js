@@ -20,211 +20,219 @@
   А так же панелью для вывода результатов операций с бэкендом.
 */
 //, id = null, name = null, age = null
-class UserApi {
-  constructor(
-    url = "https://test-users-api.herokuapp.com/users/",
-    parent = document
-  ) {
-    this.url = url;
-    this.parent = parent;
-    this.list = parent.querySelector(".js-list");
-    // this.id = id;
-    // this.name = name;
-    // this.age = age;
-    this.getAllUsersBtn = parent.querySelector(".js-getusers");
-    this.getUserByIdBtn = parent.querySelector(".js-getuser");
-    this.addPerson = parent.querySelector(".js-add-user");
-    this.removePerson = parent.querySelector(".js-remove-user");
-    this.updatePerson = parent.querySelector(".js-update");
-  }
 
-  getAllUsers() {
-    fetch(this.url)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error(`ERROR: ${response.statusText}`);
-        }
-      })
-      .then(data => {
-        let arr = data.data;
-        return arr;
-      })
-      .then(arr => {
-        let liArray = arr.map(elem => {
-          let liNode = document.createElement("li");
-          let pID = document.createElement("p");
-          let pName = document.createElement("p");
-          let pAge = document.createElement("p");
-          liNode.classList.add("list-group-item");
-          pID.textContent = `User ID: ${elem.id}`;
-          pName.textContent = `User name: ${elem.name}`;
-          pAge.textContent = `User age: ${elem.age}`;
-          liNode.append(pID, pName, pAge);
-          return liNode;
-        });
-        this.list.append(...liArray);
-      })
-      .catch(err => console.log(err));
-  }
 
-  getUserById() {
-    let id = document.querySelector(".js-getid").value;
-    fetch(`${this.url}${id}`)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error(`ERROR: ${response.statusText}`);
-        }
-      }).then(elem => {
-        console.log(elem);
-        if(elem.status == 200){
-          let li = document.querySelector(".js-user");
-          li.textContent = "";
-          let pID = document.createElement("p");
-          let pName = document.createElement("p");
-          let pAge = document.createElement("p");
-          pID.textContent = `User ID: ${elem.data.id}`;
-          pName.textContent = `User name: ${elem.data.name}`;
-          pAge.textContent = `User age: ${elem.data.age}`;
-          li.append(pID, pName, pAge);
-          document.querySelector(".js-getid").value = '';
-        }else {
-          document.querySelector(".js-getid").value = ''; 
-          swal(`Server error: ${elem.status}`, `${elem.errors[0]}`, "error");
-        }
-        
-      }).catch(err => console.log(err));
-  }
-  addUser() {
-    let name = document.querySelector(".js-name-value");
-    let age = document.querySelector(".js-age-value");
-    let user = {};
-    user.name = name.value;
-    user.age = +age.value;
-    fetch("https://test-users-api.herokuapp.com/users", {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error(`ERROR: ${response.statusText}`);
-        }
-      })
-      .then(obj => {
-        name.value = '';
-        age.value = '';
-        this.list.textContent = "";
-        if (obj.status != 500) {
-          let user = obj.data;
-          if (obj.status == 201) {
-            let li = document.querySelector(".js-new-user");
+ document.addEventListener("DOMContentLoaded", function(){
+
+ 
+
+  class UserApi {
+    constructor(url = "https://test-users-api.herokuapp.com/users/") {
+      this.url = url;
+      this.list = document.querySelector(".js-list");
+      // this.id = id;
+      // this.name = name;
+      // this.age = age;
+    }
+
+    getAllUsers() {     
+      fetch(this.url)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error(`ERROR: ${response.statusText}`);
+          }
+        })
+        .then(data => {
+          let arr = data.data;
+          return arr;
+        })
+        .then(arr => {
+          let liArray = arr.map(elem => {
+            let liNode = document.createElement("li");
+            let pID = document.createElement("p");
+            let pName = document.createElement("p");
+            let pAge = document.createElement("p");
+            liNode.classList.add("list-group-item");
+            pID.textContent = `User ID: ${elem.id}`;
+            pName.textContent = `User name: ${elem.name}`;
+            pAge.textContent = `User age: ${elem.age}`;
+            liNode.append(pID, pName, pAge);
+            return liNode;
+          });
+          this.list.append(...liArray);
+        })
+        .catch(err => console.log(err));
+    }
+
+    getUserById() {
+      let id = document.querySelector(".js-getid").value;
+      fetch(`${this.url}${id}`)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error(`ERROR: ${response.statusText}`);
+          }
+        })
+        .then(elem => {
+          if (elem.status == 200) {
+            let li = document.querySelector(".js-user");
             li.textContent = "";
             let pID = document.createElement("p");
             let pName = document.createElement("p");
             let pAge = document.createElement("p");
-            pID.textContent = `User ID: ${user._id}`;
-            pName.textContent = `User name: ${user.name}`;
-            pAge.textContent = `User age: ${user.age}`;
+            pID.textContent = `User ID: ${elem.data.id}`;
+            pName.textContent = `User name: ${elem.data.name}`;
+            pAge.textContent = `User age: ${elem.data.age}`;
             li.append(pID, pName, pAge);
-            swal("User added", `User ID: ${user._id}`, "success");
+            document.querySelector(".js-getid").value = "";
           } else {
-            swal("Try again", "Something gonna wrong", "error");
+            document.querySelector(".js-getid").value = "";
+            swal(`Server error: ${elem.status}`, `${elem.errors[0]}`, "error");
           }
-        } else {
-          swal(`Server error: ${obj.status}`, `${obj.errors[0]}`, "error");
+        })
+        .catch(err => console.log(err));
+    }
+    addUser() {
+      let name = document.querySelector(".js-name-value");
+      let age = document.querySelector(".js-age-value");
+      let user = {};
+      user.name = name.value;
+      user.age = +age.value;
+      fetch("https://test-users-api.herokuapp.com/users", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
         }
       })
-      .catch(err => console.log(err));
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error(`ERROR: ${response.statusText}`);
+          }
+        })
+        .then(obj => {
+          name.value = "";
+          age.value = "";
+          this.list.textContent = "";
+          if (obj.status != 500) {
+            let user = obj.data;
+            if (obj.status == 201) {
+              let li = document.querySelector(".js-new-user");
+              li.textContent = "";
+              let pID = document.createElement("p");
+              let pName = document.createElement("p");
+              let pAge = document.createElement("p");
+              pID.textContent = `User ID: ${user._id}`;
+              pName.textContent = `User name: ${user.name}`;
+              pAge.textContent = `User age: ${user.age}`;
+              li.append(pID, pName, pAge);
+              swal("User added", `User ID: ${user._id}`, "success");
+            } else {
+              swal("Try again", "Something gonna wrong", "error");
+            }
+          } else {
+            swal(`Server error: ${obj.status}`, `${obj.errors[0]}`, "error");
+          }
+        })
+        .catch(err => console.log(err));
+    }
+
+    removeUser() {
+      let userId = document.querySelector(".js-remove-value").value;
+
+      fetch(`https://test-users-api.herokuapp.com/users/${userId}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error(`ERROR: ${response.statusText}`);
+          }
+        })
+        .then(obj => {
+          document.querySelector(".js-remove-value").value = "";
+          document.querySelector(".js-new-user").textContent = "";
+          this.list.textContent = "";
+          document.querySelector(".js-user").textContent = "";
+          if (obj.status == 200 && obj.data != null) {
+            swal(
+              "User removed",
+              `User ID: ${userId} has been removed`,
+              "success"
+            );
+          } else {
+            swal(`Error`, `There is no user with this ID`, "error");
+          }
+        })
+        .catch(err => console.log(err));
+    }
+    updateUser() {
+      this.list.textContent = "";
+      let userId = document.querySelector(".js-update-id").value;
+      let userName = document.querySelector(".js-update-name").value;
+      let userAge = document.querySelector(".js-update-age").value;
+      let user = {};
+      user.name = userName;
+      user.age = +userAge;
+      fetch(`https://test-users-api.herokuapp.com/users/${userId}`, {
+        method: "PUT",
+        body: JSON.stringify(user),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error(`ERROR: ${response.statusText}`);
+          }
+        })
+        .then(data => {
+          document.querySelector(".js-user").textContent = "";
+
+          if (data.status == 200) {
+            swal(
+              "User updated",
+              `User with ID: ${data.data.id} has been updated`,
+              "success"
+            );
+            document.querySelector(".js-new-user").textContent = "";
+            document.querySelector(".js-update-id").value = "";
+            document.querySelector(".js-update-name").value = "";
+            document.querySelector(".js-update-age").value = "";
+          } else {
+            swal(`Server error: ${data.status}`, `${data.errors[0]}`, "error");
+          }
+        })
+        .catch(err => console.log(err));
+    }
   }
 
-  removeUser() {
-    let userId = document.querySelector(".js-remove-value").value;
+  let user = new UserApi();
+ 
+  let getAllUsersBtn = document.querySelector(".js-getusers");
+  let getUserByIdBtn = document.querySelector(".js-getuser");
+  let addPerson = document.querySelector(".js-add-user");
+  let removePerson = document.querySelector(".js-remove-user");
+  let updatePerson = document.querySelector(".js-update");
 
-    fetch(`https://test-users-api.herokuapp.com/users/${userId}`, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error(`ERROR: ${response.statusText}`);
-        }
-      })
-      .then(obj => {
-        document.querySelector(".js-remove-value").value ='';
-        this.list.textContent = "";
-        document.querySelector('.js-user').textContent = '';
-        if (obj.status == 200 && obj.data != null) {
-          swal(
-            "User removed",
-            `User ID: ${userId} has been removed`,
-            "success"
-          );
-        } else {
-          swal(`Error`, `There is no user with this ID`, "error");
-        }
-      })
-      .catch(err => console.log(err));
-  }
-  updateUser() {
-    this.list.textContent = "";
-    let userId = document.querySelector(".js-update-id").value;
-    let userName = document.querySelector(".js-update-name").value;
-    let userAge = document.querySelector(".js-update-age").value;
-    let user = {};
-    user.name = userName;
-    user.age = +userAge;
-    fetch(`https://test-users-api.herokuapp.com/users/${userId}`, {
-      method: "PUT",
-      body: JSON.stringify(user),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error(`ERROR: ${response.statusText}`);
-        }
-      })
-      .then(data => {
-        console.log(data);
-        if (data.status == 200) {
-          swal(
-            "User updated",
-            `User with ID: ${data.data.id} has been updated`,
-            "success"
-          );
-        } else {
-          swal(`Server error: ${data.status}`, `${data.errors[0]}`, "error");
-        }
-      })
-      .catch(err => console.log(err));
-  }
+  getAllUsersBtn.addEventListener("click", user.getAllUsers.bind(user));
+  getUserByIdBtn.addEventListener("click", user.getUserById.bind(user));
+  addPerson.addEventListener("click", user.addUser.bind(user));
+  removePerson.addEventListener("click", user.removeUser.bind(user));
+  updatePerson.addEventListener("click", user.updateUser.bind(user));
 
-  start() {
-    this.getAllUsersBtn.addEventListener("click", this.getAllUsers.bind(this));
-    this.getUserByIdBtn.addEventListener("click", this.getUserById.bind(this));
-    this.addPerson.addEventListener("click", this.addUser.bind(this));
-    this.removePerson.addEventListener("click", this.removeUser.bind(this));
-    this.updatePerson.addEventListener("click", this.updateUser.bind(this));
-  }
-}
-
-let user = new UserApi();
-user.start();
+})
