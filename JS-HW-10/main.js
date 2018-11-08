@@ -21,11 +21,7 @@
 */
 //, id = null, name = null, age = null
 
-
- document.addEventListener("DOMContentLoaded", function(){
-
- 
-
+document.addEventListener("DOMContentLoaded", function() {
   class UserApi {
     constructor(url = "https://test-users-api.herokuapp.com/users/") {
       this.url = url;
@@ -35,7 +31,7 @@
       // this.age = age;
     }
 
-    getAllUsers() {     
+    getAllUsers() {
       fetch(this.url)
         .then(response => {
           if (response.ok) {
@@ -222,7 +218,7 @@
   }
 
   let user = new UserApi();
- 
+
   let getAllUsersBtn = document.querySelector(".js-getusers");
   let getUserByIdBtn = document.querySelector(".js-getuser");
   let addPerson = document.querySelector(".js-add-user");
@@ -234,5 +230,4 @@
   addPerson.addEventListener("click", user.addUser.bind(user));
   removePerson.addEventListener("click", user.removeUser.bind(user));
   updatePerson.addEventListener("click", user.updateUser.bind(user));
-
-})
+});
