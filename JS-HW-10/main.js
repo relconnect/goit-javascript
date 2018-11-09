@@ -29,6 +29,17 @@ document.addEventListener("DOMContentLoaded", function() {
       // this.id = id;
       // this.name = name;
       // this.age = age;
+      this.getAllUsersBtn = document.querySelector(".js-getusers");
+       this.getUserByIdBtn = document.querySelector(".js-getuser");
+       this.addPerson = document.querySelector(".js-add-user");
+       this.removePerson = document.querySelector(".js-remove-user");
+       this.updatePerson = document.querySelector(".js-update");
+
+  this.getAllUsersBtn.addEventListener("click", this.getAllUsers.bind(this));
+  this.getUserByIdBtn.addEventListener("click", this.getUserById.bind(this));
+  this.addPerson.addEventListener("click", this.addUser.bind(this));
+  this.removePerson.addEventListener("click", this.removeUser.bind(this));
+  this.updatePerson.addEventListener("click", this.updateUser.bind(this));
     }
 
     getAllUsers() {
@@ -219,15 +230,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let user = new UserApi();
 
-  let getAllUsersBtn = document.querySelector(".js-getusers");
-  let getUserByIdBtn = document.querySelector(".js-getuser");
-  let addPerson = document.querySelector(".js-add-user");
-  let removePerson = document.querySelector(".js-remove-user");
-  let updatePerson = document.querySelector(".js-update");
-
-  getAllUsersBtn.addEventListener("click", user.getAllUsers.bind(user));
-  getUserByIdBtn.addEventListener("click", user.getUserById.bind(user));
-  addPerson.addEventListener("click", user.addUser.bind(user));
-  removePerson.addEventListener("click", user.removeUser.bind(user));
-  updatePerson.addEventListener("click", user.updateUser.bind(user));
+  
 });
