@@ -74,7 +74,7 @@
         </ul>
       </section>
       <button type="submit" class="submit">Filter</button>
-      <button type="reset">Clear</button>
+      <button type="reset" class="reset">Clear</button>
     </form>
 
     <div class="root">
@@ -82,14 +82,15 @@
     </div>
 
     <script type="hbs/template" id="card">
-      <div class="card">
+      <div class="card">       
         <img src="{{img}}" alt="" class="card__img">
         <div class="card__name">{{name}}</div>
-        <div class="card__size">{{size}}</div>
-        <div class="card__color">{{color}}</div>
-        <div class="card_releas-date">{{release_date}}</div>
-        <div class="card__description">{{descr}}</div>
-        <div class="card__price">{{price}}</div>
+        <div class="card__size">Display: {{size}}</div>
+        <div class="card__color">Color: {{color}}</div>
+        <div class="card_releas-date">Release Date: {{release_date}} year</div>
+        <div class="card__description">
+            Specifications: {{descr}}</div>
+        <div class="card__price">{{price}}$</div>        
       </div>
     </script>
   </div>
