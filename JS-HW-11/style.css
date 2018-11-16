@@ -1,0 +1,20 @@
+.wrapper {
+    display: flex;
+}
+.form  {
+    margin: 5px;
+    width: 150px;
+    padding: 10px;
+    border: 2px solid rgba(0,0,0,.1);
+}
+.card {
+    width: 200px;
+    margin: 15px;
+}
+.card__img {
+    width: 100%;
+}
+.root {
+    display: flex;
+    flex-wrap: wrap;
+}
