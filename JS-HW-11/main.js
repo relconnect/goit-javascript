@@ -302,7 +302,7 @@ btn.addEventListener("click", function (e) {
       filter.size.push(+elem.value);
     } else if (elem.name == "color") {
       filter.color.push(elem.value);
-    } else {
+    } else if (elem.name == "release_date"){
       filter.release_date.push(+elem.value);
     }
   });
