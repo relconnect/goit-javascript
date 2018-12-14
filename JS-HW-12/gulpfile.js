@@ -1,6 +1,9 @@
 'use strict';
 
 const gulp = require('gulp');
+const handlebars = require('gulp-handlebars');
+const wrap = require('gulp-wrap');
+const declare = require('gulp-declare');
 const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
@@ -134,4 +137,4 @@ gulp.task('build', cb =>
   ),
 );
 
-gulp.task('start', cb => sequence('build', 'serve', 'watch'));
+gulp.task('start', cb => sequence('templates','build', 'serve', 'watch'));

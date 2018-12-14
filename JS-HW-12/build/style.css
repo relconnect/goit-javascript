@@ -1,0 +1,77 @@
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  margin-bottom: 50px; }
+  .form-wrapper .form {
+    width: 300px;
+    display: flex;
+    flex-direction: column; }
+  .form-wrapper .form__text {
+    border: none;
+    border-bottom: 2px solid turquoise;
+    width: 100%; }
+    .form-wrapper .form__text::-webkit-input-placeholder {
+      transition: all 0.3s ease-in;
+      -webkit-transform-origin: 0 50%;
+              transform-origin: 0 50%; }
+    .form-wrapper .form__text:focus {
+      outline: none; }
+      .form-wrapper .form__text:focus::-webkit-input-placeholder {
+        -webkit-transform: scale(0);
+                transform: scale(0);
+        opacity: 0; }
+  .form-wrapper .button {
+    width: 150px;
+    box-shadow: 1px 8px 21px -5px #276873;
+    border: 0 none;
+    outline: none;
+    margin-top: 20px;
+    background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#408c99',GradientType=0);
+    background-color: #599bb3;
+    border-radius: 9px;
+    display: block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 21px;
+    font-weight: bold;
+    padding: 12px 25px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #3d768a; }
+    .form-wrapper .button:hover {
+      background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
+      background-color: #408c99; }
+    .form-wrapper .button:active {
+      position: relative;
+      top: 1px;
+      outline: none;
+      border: 0 none; }
+
+.root {
+  display: flex;
+  flex-wrap: wrap; }
+  .root .item {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 150px;
+    min-height: 100px;
+    padding: 10px;
+    margin: 2px;
+    border: 2px solid turquoise;
+    border-radius: 10px; }
+  .root .button {
+    box-shadow: 1px 8px 21px -5px #276873;
+    border: 0 none;
+    outline: none;
+    background-color: #599bb3;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: antiquewhite;
+    border-radius: 5px; }
+

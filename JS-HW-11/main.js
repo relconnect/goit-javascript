@@ -171,6 +171,7 @@
 
 var container = document.querySelector('.root');
 var source = document.querySelector('#card').innerHTML.trim();
+
 var template = Handlebars.compile(source);
 
 var laptops = [{

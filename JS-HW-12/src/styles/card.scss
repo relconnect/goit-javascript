@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 150px;
+    min-height: 100px;
+    padding: 10px;
+    margin: 2px;
+    border: 2px solid turquoise;
+    border-radius: 10px;
+  }
+  .button {
+    box-shadow: 1px 8px 21px -5px #276873;
+    border: 0 none;
+    outline: none;
+    background-color: #599bb3;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: antiquewhite;
+    border-radius: 5px;
+  }
+}
